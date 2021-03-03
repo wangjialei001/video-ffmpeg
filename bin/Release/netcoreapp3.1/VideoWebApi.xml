@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VideoWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:VideoWebApi.Controllers.VideoController.SendCmd(System.String)">
+            <summary>
+            发送命令
+            </summary>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VideoWebApi.Controllers.VideoController.ShowVideo(System.String)">
+            <summary>
+            播放视频
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VideoWebApi.Controllers.VideoController.CloseVideo(System.String)">
+            <summary>
+            关闭视频
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VideoWebApi.Controllers.VideoController.Playback(System.String,System.DateTime,System.Nullable{System.DateTime})">
+            <summary>
+            回放视频
+            </summary>
+            <param name="number"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VideoWebApi.Controllers.VideoController.ClosePlayback(System.String)">
+            <summary>
+            关闭视频
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="F:VideoWebApi.Util.FfmpegHelper.cmds">
+            <summary>
+            获取视频信息
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:VideoWebApi.Util.FfmpegHelper.VideoScreenshot(System.String,System.String)">
+            <summary>
+            视频截图
+            </summary>
+            <param name="path"></param>
+            <param name="outPath"></param>
+        </member>
+    </members>
+</doc>
