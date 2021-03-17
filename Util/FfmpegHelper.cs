@@ -88,9 +88,9 @@ namespace VideoWebApi.Util
                     return "error";
                 }
                 var cmd = cmds[number];
+                cmds.Remove(number);
                 cmd.Kill();
                 cmd.Close();
-                cmds.Remove(number);
                 Console.WriteLine(number + "视频关闭成功");
             }
             catch (Exception ex)
