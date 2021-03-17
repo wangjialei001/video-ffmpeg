@@ -12,5 +12,6 @@ namespace VideoWebApi.Model
         public string UserName { get; set; }
         public string Pwd { get; set; }
         public string Num { get; set; }
+        public int Id { get; set; }
     }
 }

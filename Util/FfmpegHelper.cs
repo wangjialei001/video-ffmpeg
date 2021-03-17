@@ -19,6 +19,7 @@ namespace VideoWebApi.Util
                 string ffmpegPath = "/usr/local/ffmpeg/bin/ffmpeg";
                 string ffprobePath = "/usr/local/ffmpeg/bin/ffprobe";
                 cmdFfmpeg = new System.Diagnostics.ProcessStartInfo(ffmpegPath);
+                //cmdFfmpeg = new System.Diagnostics.ProcessStartInfo("");
                 cmdFfprobe = new System.Diagnostics.ProcessStartInfo(ffprobePath);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -94,7 +95,7 @@ namespace VideoWebApi.Util
             }
             catch (Exception ex)
             {
-                Console.WriteLine("关闭视频失败："+ex.Message);
+                Console.WriteLine("关闭视频失败：" + ex.Message);
             }
             return "ok";
         }
@@ -136,10 +137,11 @@ namespace VideoWebApi.Util
             {
                 Console.WriteLine(cmdStr);
                 string command = cmdStr;
+                
                 cmdFfmpeg.Arguments = command;
 
                 System.Diagnostics.Process cmd = new System.Diagnostics.Process();
-                
+
                 cmd.StartInfo = cmdFfmpeg;
                 cmd.Start();
                 cmds.Add(key, cmd);
@@ -176,13 +178,13 @@ namespace VideoWebApi.Util
 
                 string InfoStr = await cmd.StandardOutput.ReadToEndAsync();
                 cmd.WaitForExit(10000);
-                Console.WriteLine("输出结果："+InfoStr);
+                Console.WriteLine("输出结果：" + InfoStr);
                 //VideoInfoModel resp = JsonConvert.DeserializeObject<VideoInfoModel>(InfoStr);
                 return InfoStr;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("接口错误："+ex.Message);
+                Console.WriteLine("接口错误：" + ex.Message);
                 return null;
             }
         }

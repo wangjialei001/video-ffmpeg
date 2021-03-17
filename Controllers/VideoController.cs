@@ -33,18 +33,26 @@ namespace VideoWebApi.Controllers
         /// <summary>
         /// 播放视频
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
+        /// <param name="equipId"></param>
         /// <returns></returns>
 
         [HttpGet]
-        public async Task<string> ShowVideo(string number)
+        public async Task<string> ShowVideo(int id, string equipId)
         {
             var videoConfigs = configuration.GetSection("VideoConfig").Get<List<VideoConfigModel>>();
-            var videoConfig = videoConfigs.FirstOrDefault(t => t.Num == number);
+            var videoConfig = videoConfigs.FirstOrDefault(t => t.Id == id);
             //string cmd = "ffmpeg -rtsp_transport tcp -i  " + "\"rtsp://" + videoConfig.UserName + ":" + videoConfig.Pwd + "@" + videoConfig.Url + ":" + videoConfig.Port + "/Streaming/Channels/" + videoConfig.Num + "01\"" + " -fflags flush_packets -max_delay 2 -flags -global_header -hls_time 2 -hls_list_size 3 -vcodec copy -y  /opt/nginx-1.19.0/html/hls/video1.m3u8";
-            string cmd = " -rtsp_transport tcp -i  " + "\"rtsp://" + videoConfig.UserName + ":" + videoConfig.Pwd + "@" + videoConfig.Url + ":" + videoConfig.Port + "/Streaming/Channels/" + videoConfig.Num + "01\"" + " -fflags flush_packets -max_delay 2 -flags -global_header -hls_time 2 -hls_list_size 3 -vcodec copy -y  -hls_wrap 5 /opt/nginx-1.19.0/html/hls/video" + videoConfig.Num + ".m3u8";
+            //string cmd = " -rtsp_transport tcp -i  " + "\"rtsp://" + videoConfig.UserName + ":" + videoConfig.Pwd + "@" + videoConfig.Url + ":" + videoConfig.Port + "/Streaming/Channels/" + videoConfig.Num + "01\"" + " -fflags flush_packets -max_delay 2 -flags -global_header -hls_time 2 -hls_list_size 3 -vcodec copy -y  -hls_wrap 5 /opt/nginx-1.19.0/html/hls/video" + videoConfig.Num + ".m3u8";
+            string fileNum = videoConfig.Num;
+            if (!string.IsNullOrEmpty(equipId))
+            {
+                fileNum = equipId;
+            }
+            string cmd = " -rtsp_transport tcp -i  " + "\"rtsp://" + videoConfig.UserName + ":" + videoConfig.Pwd + "@" + videoConfig.Url + ":" + videoConfig.Port + "/Streaming/Channels/" + videoConfig.Num + "01\"" + " -fflags flush_packets -max_delay 2 -flags -global_header -hls_time 2 -hls_list_size 3 -vcodec copy -y  -hls_wrap 5 /opt/nginx-1.19.0/html/hls/video" + fileNum + ".m3u8";
 
-            var result = await FfmpegHelper.ShowVideo(number, cmd);
+            //string cmd = "FFREPORT=file=ffreport_error_" + number + ".log:level=16 " + "/usr/local/ffmpeg/bin/ffmpeg -rtsp_transport tcp -i  " + "\"rtsp://" + videoConfig.UserName + ":" + videoConfig.Pwd + "@" + videoConfig.Url + ":" + videoConfig.Port + "/Streaming/Channels/" + videoConfig.Num + "01\"" + " -fflags flush_packets -max_delay 2 -flags -global_header -hls_time 2 -hls_list_size 3 -vcodec copy -y  -hls_wrap 5 /opt/nginx-1.19.0/html/hls/video" + videoConfig.Num + ".m3u8";
+            var result = await FfmpegHelper.ShowVideo(videoConfig.Num, cmd);
             return result;
         }
         /// <summary>
