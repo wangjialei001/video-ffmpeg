@@ -101,15 +101,12 @@ namespace VideoWebApi.Util
         }
         public static async Task<string> ShowVideo(string number, string cmdStr)
         {
-            if (cmds.ContainsKey(number))
-            {
-                Console.WriteLine(number + "视频已存在");
-                return "ok";
-            }
-            Task.Run(async () =>
-            {
-                await SendCmd(cmdStr, number);
-            });
+            //if (cmds.ContainsKey(number))
+            //{
+            //    Console.WriteLine(number + "视频已存在");
+            //    return "ok";
+            //}
+            SendCmd(cmdStr, number);
             return "ok";
         }
         public static async Task<string> ClosePlaybackVideo(string number)

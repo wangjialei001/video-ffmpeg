@@ -55,5 +55,10 @@
             <param name="path"></param>
             <param name="outPath"></param>
         </member>
+        <member name="T:VideoWebApi.Util.StartVideoService">
+            <summary>
+            启动视频转换
+            </summary>
+        </member>
     </members>
 </doc>

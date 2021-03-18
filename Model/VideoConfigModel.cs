@@ -13,5 +13,6 @@ namespace VideoWebApi.Model
         public string Pwd { get; set; }
         public string Num { get; set; }
         public int Id { get; set; }
+        public long EquipId { get; set; }
     }
 }

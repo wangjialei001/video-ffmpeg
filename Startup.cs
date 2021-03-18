@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using VideoWebApi.Util;
 
 namespace VideoWebApi
 {
@@ -39,6 +40,7 @@ namespace VideoWebApi
                 // 添加控制器层注释，true表示显示控制器注释
                 options.IncludeXmlComments(xmlPath, true);
             });
+            services.AddSingleton<IHostedService, StartVideoService>();
             services.AddControllers();
         }
 
