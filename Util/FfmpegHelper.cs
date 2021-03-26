@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -130,6 +131,18 @@ namespace VideoWebApi.Util
         }
         public static async Task<string> SendCmd(string cmdStr, string key)
         {
+            try
+            {
+                var tsPath = "/opt/nginx-1.19.0/html/hls/" + key;
+                if (!Directory.Exists(tsPath))
+                {
+                    Directory.CreateDirectory(tsPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             try
             {
                 Console.WriteLine(cmdStr);
